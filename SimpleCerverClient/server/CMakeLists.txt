@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(server VERSION 0.1.0)
+
+include(CTest)
+enable_testing()
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+if(WIN32)
+    add_executable(server main.c wsocket.h wsocket.c crossplatform.h)  
+    target_link_libraries(server ws2_32)
+endif (WIN32)
+if (UNIX)
+    add_executable(server main.c lsocket.h lsocket.c crossplatform.h)
+endif(UNIX)
